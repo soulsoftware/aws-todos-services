@@ -1,0 +1,21 @@
+{
+  "name": "aws-samples",
+  "version": "1.0.0",
+  "description": "### Services",
+  "main": "index.js",
+  "scripts": {
+    "dynamodb":"node dynamodb.js"
+  },
+  "author": "bsorrentino <bartolomeo.sorrentino@gmail.com> (http://soulsoftware-bsc.blogspot.it/)",
+  "license": "MIT",
+  "dependencies": {
+    "@types/inquirer": "0.0.43",
+    "aws-sdk": "^2.344.0",
+    "inquirer": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node": "^10.12.1",
+    "typescript": "^3.1.4"
+  }
+}
