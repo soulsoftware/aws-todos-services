@@ -7,8 +7,11 @@
     "dynamodb": "node dynamodb/dynamodb.js",
     "offline" : "cd lambda; serverless offline",
     "deploy" : "cd lambda; serverless deploy",
-    "deploy.list": "cd lamda; serverless deploy -f ListTodoFunction --force",
-    "deploy.add": "cd lamda; serverless deploy -f AddTodoFunction --force"
+    "undeploy" : "cd lambda; serverless remove",
+    "deploy.list": "cd lambda; serverless deploy -f ListTodoFunction --force",
+    "deploy.add": "cd lambda; serverless deploy -f AddTodoFunction --force",
+    "deploy.delete": "cd lambda; serverless deploy -f DeleteTodoFunction --force",
+    "deploy.update": "cd lambda; serverless deploy -f UpdateTodoFunction --force"
   },
   "author": "bsorrentino <bartolomeo.sorrentino@gmail.com> (http://soulsoftware-bsc.blogspot.it/)",
   "license": "MIT",
