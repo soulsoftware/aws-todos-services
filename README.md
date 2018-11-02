@@ -8,8 +8,9 @@
 
  Service | Description
   --- | ---
- S3 | Hosting
  DynamoDB | Storage
+ Lambda | Serverless
+ S3 | Hosting
  Formation | Deployment
 
 
