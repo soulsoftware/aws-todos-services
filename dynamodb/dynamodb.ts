@@ -64,7 +64,7 @@ async function waitForCommand() {
 }
 
 function createTables() {
-  const schema = require( './dynamodb/schema.json');
+  const schema = require( './schema.json');
   return dynamodb.createTable( schema ).promise()
 
 }

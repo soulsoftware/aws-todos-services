@@ -1,12 +1,10 @@
 {
     "TableName": "todo",
     "KeySchema": [
-      { "AttributeName": "Id", "KeyType": "HASH" },
-      { "AttributeName": "Title", "KeyType": "RANGE" }
+      { "AttributeName": "id", "KeyType": "HASH" }
     ],
     "AttributeDefinitions": [
-      { "AttributeName": "Id", "AttributeType": "S" },
-      { "AttributeName": "Title", "AttributeType": "S" }
+      { "AttributeName": "id", "AttributeType": "S" }
     ],
     "ProvisionedThroughput": {
       "ReadCapacityUnits": 5,
