@@ -6,8 +6,9 @@
   "scripts": {
     "dynamodb": "node dynamodb/dynamodb.js",
     "offline" : "cd lambda; serverless offline",
+    "deploy" : "cd lambda; serverless deploy",
     "deploy.list": "cd lamda; serverless deploy -f ListTodoFunction --force",
-    "deploy.add": "cd lamda; serverless deploy -f AddTodoFunction --force",
+    "deploy.add": "cd lamda; serverless deploy -f AddTodoFunction --force"
   },
   "author": "bsorrentino <bartolomeo.sorrentino@gmail.com> (http://soulsoftware-bsc.blogspot.it/)",
   "license": "MIT",

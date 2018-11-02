@@ -18,11 +18,10 @@ AWS.config.update({
 const tableName = process.env.TABLE_NAME;
 let dynamodb = new AWS.DynamoDB.DocumentClient();
 function addTodo(todo) {
-    if (!todo.id)
-        todo.id = uuid_1.default.v1();
     return dynamodb.put({
         TableName: tableName,
-        Item: todo
+        Item: todo,
+        ReturnValues: 'ALL_OLD'
     }).promise();
 }
 // LAMDA FUNCTION
@@ -41,8 +40,11 @@ exports.handler = async (event, context /*, callback:Callback*/) => {
         let input = JSON.parse(event.body);
         console.log("addTodoFunction ", input, context);
         if (input) {
+            if (!input.id)
+                input.id = uuid_1.default.v1();
             let result = await addTodo(input);
-            return res(200, JSON.stringify(result));
+            console.log("addTodoFunction", result);
+            return res(200, JSON.stringify(input));
         }
         return res(400, "input invalid!");
     }

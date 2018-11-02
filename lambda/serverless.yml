@@ -37,8 +37,8 @@ provider:
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
-        #- dynamodb:UpdateItem
-        #- dynamodb:DeleteItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:us-east-2:*:*"
 
 # you can add statements to the Lambda function's IAM Role here
@@ -79,12 +79,30 @@ functions:
           - http:
               path: AddTodoFunction
               method: post
+              cors:
+                origin: '*'
   ListTodoFunction:
     handler: list.handler
     events:
           - http:
               path: ListTodoFunction
               method: get
+              cors:
+                origin: '*'
+  DeleteTodoFunction:
+    handler: del.handler
+    events:
+          - http:
+              path: DeleteTodoFunction
+              method: delete
+              cors:
+                origin: '*'
+  UpdateTodoFunction:
+    handler: upd.handler
+    events:
+          - http:
+              path: UpdateTodoFunction
+              method: put
               cors:
                 origin: '*'
 #    The following are a few example events you can configure

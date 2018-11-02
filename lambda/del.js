@@ -13,25 +13,32 @@ AWS.config.update({
 });
 const tableName = process.env.TABLE_NAME;
 let dynamodb = new AWS.DynamoDB.DocumentClient();
-function deleteTodo(key) {
+function deleteTodo(id) {
     dynamodb.delete({
-        TableName: tableName
-    });
-    return dynamodb.put({
         TableName: tableName,
-        Item: item
+        Key: { id: id }
     }).promise();
 }
 // LAMDA FUNCTION
 exports.handler = async (event, context /*, callback:Callback*/) => {
+    const res = (code, body) => {
+        return {
+            statusCode: code,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
+            body: body
+        };
+    };
     try {
         let input = JSON.parse(event.body);
-        console.log("addTodoFunction ", input, context);
-        if (input.name) {
-            let result = await addTodo(input.name);
-            return { statusCode: 200, body: JSON.stringify(result) };
+        console.log("deleteTodoFunction ", input, context);
+        if (input.id) {
+            let result = await deleteTodo(input.id);
+            return res(200, JSON.stringify(result));
         }
-        return { statusCode: 400, body: "input invalid!" };
+        return res(400, "input invalid!");
     }
     catch (err) {
         return { statusCode: 500, body: JSON.stringify(err) };

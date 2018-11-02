@@ -1,7 +1,7 @@
 'use strict';
 
 import AWS = require('aws-sdk');
-import { Handler, Context, Callback, APIGatewayProxyResult as APIResult } from 'aws-lambda';
+import { Handler, Context, APIGatewayProxyResult as APIResult } from 'aws-lambda';
 
 AWS.config.update({
   region:'us-east-2'

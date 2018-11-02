@@ -9,7 +9,7 @@
 
 import AWS = require('aws-sdk');
 import uuid from "uuid";
-import { Handler, Context, Callback, APIGatewayProxyResult as APIResult } from 'aws-lambda';
+import { Handler, Context, APIGatewayProxyResult as APIResult } from 'aws-lambda';
 
 
 AWS.config.update({
@@ -28,11 +28,12 @@ type Todo = {
 
 function addTodo( todo:Todo ) {
 
-  if( !todo.id ) todo.id = uuid.v1();
+
 
   return dynamodb.put( {
     TableName: tableName,
-    Item: todo
+    Item: todo,
+    ReturnValues: 'ALL_OLD'
   }).promise();
 
 }
@@ -40,7 +41,7 @@ function addTodo( todo:Todo ) {
 // LAMDA FUNCTION
 export const handler: Handler<APIResult> = async ( event:any , context:Context /*, callback:Callback*/ )  => {
 
-  const res = ( code:number, body:any ):APIResult => {
+  const res = ( code:number, body:string ):APIResult => {
     return {
       statusCode:code,
       headers: {
@@ -56,9 +57,13 @@ export const handler: Handler<APIResult> = async ( event:any , context:Context /
    console.log( "addTodoFunction ", input, context );
 
    if( input ) {
+     if( !input.id ) input.id = uuid.v1();
+
      let result = await addTodo( input );
 
-     return  res(200, JSON.stringify(result) ) ;
+     console.log( "addTodoFunction", result );
+
+     return  res(200, JSON.stringify(input) ) ;
    }
    return  res( 400, "input invalid!" ) ;
 

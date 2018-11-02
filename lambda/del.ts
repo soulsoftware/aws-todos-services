@@ -9,7 +9,7 @@
  */
 
 import AWS = require('aws-sdk');
-import { Handler, Context, Callback, APIGatewayProxyResult as APIResult } from 'aws-lambda';
+import { Handler, Context, APIGatewayProxyResult as APIResult } from 'aws-lambda';
 
 
 AWS.config.update({
@@ -20,32 +20,38 @@ const tableName = process.env.TABLE_NAME as string;
 
 let dynamodb = new AWS.DynamoDB.DocumentClient();
 
-function deleteTodo( key:string ) {
+function deleteTodo( id:string ) {
 
   dynamodb.delete( {
-    TableName: tableName;
-  })
-  return dynamodb.put( {
     TableName: tableName,
-    Item: item
+    Key:{ id:id }
   }).promise();
 
 }
 
 // LAMDA FUNCTION
 export const handler: Handler = async ( event:any , context:Context /*, callback:Callback*/ )  => {
+  const res = ( code:number, body:any ):APIResult => {
+    return {
+      statusCode:code,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: body
+  }};
 
 try {
   let input = JSON.parse( event.body );
 
- console.log( "addTodoFunction ", input, context );
+ console.log( "deleteTodoFunction ", input, context );
 
- if( input.name ) {
-   let result = await addTodo( input.name );
+ if( input.id ) {
+   let result = await deleteTodo( input.id );
 
-   return  { statusCode:200, body: JSON.stringify(result) } ;
+   return res( 200, JSON.stringify(result) ) ;
  }
- return  { statusCode:400, body: "input invalid!" } ;
+ return  res( 400, "input invalid!" ) ;
 
 }
 catch( err ) {
