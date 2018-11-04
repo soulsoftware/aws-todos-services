@@ -4,7 +4,7 @@
 
 # APPLICATION
 
-Services to implements a simple TODO(s) application. The services have been developed in **typescript** for **node.js**
+Services to implements a simple TODO(s) application. The services have been developed in **typescript**  using [SDK JavaScript SDK for Node.js](https://aws.amazon.com/sdk-for-node-js/)
 
 ## AWS Use Case
 
