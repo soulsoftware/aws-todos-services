@@ -4,14 +4,29 @@
 
 # APPLICATION
 
+Services to implements a simple TODO(s) application. The services have been developed in **typescript** for **node.js**
+
+## AWS Use Case
+
+![WEB](aws-use-case.png)
+
+
 ## AWS Services
 
  Service | Description
   --- | ---
  DynamoDB | Storage
- Lambda | Serverless
+ Lambda | Serverless Computing
  S3 | Hosting
- Formation | Deployment
+Cognito | Security (_not yet implemented_)
+
+## Tools
+
+Name | Description
+ --- | ---
+[AWS CLI](https://aws.amazon.com/cli/) | AWS Command Line Interface
+[Serverless](https://serverless.com/) | Test & Deployment
+
 
 
 ### References
